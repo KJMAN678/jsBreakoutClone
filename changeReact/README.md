@@ -29,24 +29,20 @@ $ cd ..
 $ npx prettier --prefix changeReact --write changeReact
 $ npx eslint --config changeReact/eslint.config.mjs --fix changeReact
 
-eslint.confg.js に以下を追加
+eslint.confg.mjs に以下を追加
 
   略
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     languageOptions: { globals: globals.browser },
     // 追加
     settings: {
       react: {
-          version: 'detect',
+        version: 'detect',
       },
     },
-  },
-  tseslint.configs.recommended,
-  // 追加
-  pluginReact.configs.flat.recommended,
-  pluginReact.configs.flat["jsx-runtime"],
-]);
+    tseslint.configs.recommended,
+    pluginReact.configs.flat.recommended,
+    // 追加
+    pluginReact.configs.flat["jsx-runtime"],
 
 # ディレクトリを指定し、ライブラリのインストール
 $ npm install --prefix changeReact
