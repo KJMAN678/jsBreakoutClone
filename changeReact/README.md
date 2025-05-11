@@ -26,7 +26,7 @@ $ npm init @eslint/config
 $ cd ..
 
 # formatter の実行
-$ npx prettier --prefix changeReact --write changeReact
+$ npx prettier --write changeReact --log-level warn
 $ npx eslint --config changeReact/eslint.config.mjs --fix changeReact
 
 eslint.confg.mjs に以下を追加
@@ -105,3 +105,5 @@ const FocusComponent = () => {
   );
 }
 ```
+
+- [React アニメーションの基本と requestAnimationFrame を活用する方法](https://tech-hint.hatenablog.com/entry/2025/01/26/175841)

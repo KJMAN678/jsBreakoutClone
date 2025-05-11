@@ -23,8 +23,11 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
 
   makeBlocks();
 
-  // Note: setInterval をそのまま使って大丈夫か?
-  const interval = setInterval(() => {
+  let gameOver = false;
+  let animationFrameId: number;
+  const gameLoop = () => {
+    if (gameOver) return;
+
     // もっと引数減らせないか？
     ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
     DrawBall(ctx, x, y);
@@ -52,7 +55,8 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
         if (player.lives === 0) {
           alert("GAME OVER");
           document.location.reload();
-          clearInterval(interval);
+          gameOver = true;
+          return;
         } else {
           // ボールとパドルの位置と速度を初期化
           x = canvasSize.width / 2;
@@ -82,9 +86,17 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
     if (player.score === block.columnCount * block.rowCount) {
       alert("ゲームクリア！");
       document.location.reload();
-      clearInterval(interval);
+      gameOver = true;
+      return;
     }
-  }, 10);
+
+    animationFrameId = requestAnimationFrame(gameLoop);
+  };
+
+  // Start the game loop
+  // requestAnimationFrame(gameLoop);
+  gameLoop();
+  return () => cancelAnimationFrame(animationFrameId);
 };
 
 const DrawBall = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
