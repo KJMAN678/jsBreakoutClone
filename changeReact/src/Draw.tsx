@@ -49,7 +49,6 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
         dy = -dy - 0.25;
       } else {
         player.lives--;
-        console.log(player.lives);
         if (player.lives === 0) {
           alert("GAME OVER");
           document.location.reload();
