@@ -28,7 +28,7 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
   const gameLoop = () => {
     if (gameOver) return;
 
-    // もっと引数減らせないか？
+    // NOTE: もっと引数減らせないか？
     ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
     DrawBall(ctx, x, y);
     drawPaddle(ctx);
@@ -93,8 +93,7 @@ export const Draw = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
     animationFrameId = requestAnimationFrame(gameLoop);
   };
 
-  // Start the game loop
-  // requestAnimationFrame(gameLoop);
+  // アニメーションのループを開始する
   gameLoop();
   return () => cancelAnimationFrame(animationFrameId);
 };
