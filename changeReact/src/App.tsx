@@ -1,16 +1,28 @@
 import "./style.css";
-import { useRef, useEffect, createContext } from "react";
+import { useRef, useEffect } from "react";
 import { Draw } from "./Draw";
 
+// NOTE: 変数は別のファイルに纏める
 export const canvasSize = {
   width: 0,
   height: 0,
+  offsetLeft: 0,
 };
 
 export const ball = {
   radius: 10,
 };
 
+export const paddle = {
+  height: 10,
+  width: 75,
+  x: 0,
+};
+
+export const player = {
+  score: 0,
+  lives: 3,
+};
 
 export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,12 +41,14 @@ export const App = () => {
     // 使い方あってる？
     canvasSize.width = canvas.width;
     canvasSize.height = canvas.height;
+    canvasSize.offsetLeft = canvas.offsetLeft;
+    // パドルの初期位置を画面の中央に配置
+    paddle.x = (canvasSize.width - paddle.width) / 2;
 
-    let x = canvasSize.width / 2;
-    let y = canvasSize.height - 30;
+    const x = canvasSize.width / 2;
+    const y = canvasSize.height - 30;
 
     Draw(ctx, x, y);
-
   }, []);
 
   return (
